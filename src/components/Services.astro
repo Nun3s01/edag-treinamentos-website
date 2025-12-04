@@ -1,0 +1,208 @@
+---
+// Dados dos serviços (Fica fácil editar depois)
+const services = [
+    {
+        title: "Direção Defensiva",
+        desc: "Técnicas avançadas para antecipar riscos e prevenir acidentes, garantindo a integridade do condutor e da carga.",
+        icon: "shield",
+    },
+    {
+        title: "Economia de Combustível",
+        desc: "Métodos de condução inteligente que reduzem o consumo e o desgaste do veículo, aumentando a rentabilidade.",
+        icon: "leaf",
+    },
+    {
+        title: "Segurança no Trânsito",
+        desc: "Atualização sobre legislação e normas de segurança para um comportamento responsável nas estradas.",
+        icon: "traffic",
+    },
+];
+---
+
+<section class="services-section">
+    <div class="container">
+        <div class="section-header">
+        <h2>Nossos Treinamentos</h2>
+        <p>Capacitação completa para elevar o nível da sua frota.</p>
+        </div>
+
+        <div class="cards-grid">
+        {
+            services.map((service) => (
+            <div class="card">
+                <div class="icon-box">
+                {service.icon === "shield" && (
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    >
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                )}
+                {service.icon === "leaf" && (
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    >
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                    </svg>
+                )}
+                {service.icon === "traffic" && (
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    >
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                    </svg>
+                )}
+                </div>
+
+                <h3>{service.title}</h3>
+                <p>{service.desc}</p>
+
+            </div>
+            ))
+        }
+        </div>
+    </div>
+    </section>
+
+<style>
+    .services-section {
+        padding: 6rem 20px;
+        color: white;    }
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    /* Cabeçalho da Seção */
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+        font-size: 2.5rem;
+        color: #ff0000;
+        margin-bottom: 1rem;
+    }
+    
+    .section-header p {
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+        font-size: 1.3rem;
+        background-color: #565656;
+        -webkit-background-clip: text;
+            -moz-background-clip: text;
+                background-clip: text;
+    }
+
+    /* Grid dos Cards */
+    .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    /* Estilo do Card */
+    .card {
+        background: #1e1e1e; /* Um pouco mais claro que o fundo */
+        padding: 40px 30px;
+        border-radius: 8px;
+        border: 1px solid #333;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Efeito Hover do Card */
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: #000000;
+        box-shadow: 5px 4px 15px rgba(0, 0, 0, 0.721);
+    }
+
+    /* Ícone */
+    .icon-box {
+        background: rgba(255, 0, 0, 0.1);
+        color: #ff0000;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: inline-flex;
+        transition: all 0.3s ease;
+    }
+
+    .card:hover .icon-box {
+        background: #ff0000;
+        color: white;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+    p {
+        color: #aaa;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        flex-grow: 1; /* Faz o texto empurrar o link para o final */
+    }
+
+    /* Link "Saiba mais" */
+    .card-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: gap 0.2s;
+    }
+
+    .card-link:hover {
+        color: #ff0000;
+        gap: 10px; /* A setinha se move para a direita */
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .section-header h2 {
+        font-size: 2rem;
+        }
+        .cards-grid {
+        grid-template-columns: 1fr; /* Uma coluna no celular */
+        }
+    }
+</style>

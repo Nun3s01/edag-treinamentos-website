@@ -1,0 +1,189 @@
+---
+import BlurText from './BlurText/BlurText.tsx';
+import ShinyText from './ShinyText/ShinyText.tsx';
+import RotatingText from './RotatingText/RotatingText.tsx';
+---
+
+<section class="hero-section">
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="/videos/hero-video.mp4" type="video/mp4" />
+  </video>
+  <div class="overlay"></div>
+
+  <div class="hero-content">
+    <h1><BlurText text="Excelência em Treinamentos" delay={60} stepDuration={.8} animateBy="words" direction="bottom" className="text-2xl mb-8" client:visible /></h1>
+    <div class="slogan-text-hero">
+      <p>Capacitando profissionais para um trânsito mais</p>
+      <div class="text-rotating-and-e">
+        <RotatingText
+          texts={['seguro', 'consciente', 'ágil', 'humano', 'inteligente', 'ético', 'gentil', 'organizado']}
+          mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+          staggerFrom={"center"}
+          initial={{ y: "24%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1}}
+          exit={{ y: "-6px", opacity: 0 }}
+          staggerDuration={0.025}
+          splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+          transition={{ type: "spring", damping: 30, stiffness: 400 }}
+          rotationInterval={4000}
+          client:visible
+        />
+        <p>e</p>
+        <RotatingText
+          texts={['eficiente', 'fluido', 'responsável', 'dinâmico', 'confiável', 'produtivo', 'funcional', 'veloz']}
+          mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+          staggerFrom={"center"}
+          initial={{ y: "24%", opacity: 0 }}
+          animate={{ y: 0, opacity: 1}}
+          exit={{ y: "-6px", opacity: 0 }}
+          staggerDuration={0.025}
+          splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+          transition={{ type: "spring", damping: 30, stiffness: 400 }}
+          rotationInterval={4600}
+          client:visible
+        />
+      </div>
+    </div>
+    <div class="btn-cta-container">
+      <a href="#contato" class="btn-cta"><ShinyText text="Fale com um Especialista " disabled={false} speed={3.5} className='custom-class' client:visible /></a>
+    </div>
+  </div>
+</section>
+
+
+
+
+<style>
+  .hero-section {
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    padding-bottom: 23px;
+    position: relative; /* Necessário para segurar os elementos absolutos */
+    height: 80vh;
+    min-height: 650px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    color: white;
+    background: transparent;
+    overflow: hidden; /* Corta o vídeo se ele sobrar nas bordas */;
+    border-bottom: 1px solid #000000;
+    box-shadow: 0 10px 27px #000000;
+  }
+  
+  /* Estilo do Vídeo */
+  .video-bg {
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    position: absolute; /* ISSO É O MAIS IMPORTANTE: Tira o vídeo da fila */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Garante que o vídeo cubra tudo sem esticar */
+    z-index: 0; /* Joga o vídeo para trás de tudo */
+    border-bottom: 1px solid #000000;
+  }
+
+  /* Estilo da Máscara Escura */
+  .overlay {
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Preto com 60% de opacidade */
+    z-index: 1; /* Fica na frente do vídeo, mas atrás do texto */
+    border-bottom: 1px solid #000000;
+  }
+
+  /* Conteúdo */
+  .hero-content {
+    position: relative;
+    z-index: 2; /* Garante que o texto fique no topo da pilha */
+    max-width: 800px;
+    padding: 0 20px;
+  }
+
+  .slogan-text-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    text-shadow: 0 0px 2px rgb(255, 255, 255);
+  }
+
+  p {
+    display: inline-block;
+    margin: 0 4px;
+    align-items: center;
+    justify-self: center;
+    text-align: center;
+    font-size: 1.25rem;
+    opacity: 0.9;
+    text-shadow: 0 0px 15px rgb(255, 255, 255);
+  }
+  .text-rotating-and-e {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #b20000;
+    border-radius: 6px;
+  }
+
+  .btn-cta-container {
+    margin-top: 7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .btn-cta {
+    background-color: transparent; /* Vermelho EDAG */
+    font-family: "Poppins", sans-serif; /* Mesma fonte do site */
+    font-weight: 600; /* Semi-bold */
+    border: 1px solid #cc0000; /* Borda vermelha */
+    border-radius: 50px; /* Cantos arredondados iguais aos inputs */
+    cursor: pointer;
+
+    /* Animação suave */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+
+    text-transform: uppercase; /* Letras maiúsculas para mais impacto */
+    letter-spacing: 0.5px;
+  }
+
+  /* Estado HOVER (Ao passar o mouse) */
+  .btn-cta:hover {
+    background-color: #cc0000; /* Vermelho mais escuro */
+    transform: translateY(-2px); /* O botão "flutua" levemente para cima */
+    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.4); /* Sombra vermelha brilhante (Glow) */
+  }
+
+  /* Estado ACTIVE (Ao clicar) */
+  .btn-cta:active {
+    transform: translateY(1px); /* O botão afunda levemente */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Responsividade */
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+    .hero-section {
+      height: 70vh;
+    }
+  }
+</style>

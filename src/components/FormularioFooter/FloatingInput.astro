@@ -1,0 +1,217 @@
+---
+import ErrorTooltip from "../ErrorTooltip.astro";
+
+const { label, id, maxlength, minlength, onlyLetters, onlyNumbers, mask, ...rest } = Astro.props;
+
+// Define o tamanho máximo para telefone automaticamente se não for passado
+const finalMaxLength = mask === 'phone' ? (maxlength || 15) : maxlength;
+---
+
+<div class="floating-group" style="width: 100%;">
+  <input
+    id={id}
+    name={id}
+    placeholder=" "
+    class="floating-input"
+    maxlength={finalMaxLength}
+    minlength={minlength}
+    data-only-letters={onlyLetters}
+    data-only-numbers={onlyNumbers}
+    data-mask={mask} 
+    {...rest}
+  />
+
+  <label for={id} class="floating-label">
+    {label}
+  </label>
+
+  {finalMaxLength && <span class="char-count">0/{finalMaxLength}</span>}
+
+  <ErrorTooltip />
+</div>
+
+<style>
+  /* --- ESTILOS MANTIDOS IGUAIS --- */
+  .floating-group {
+    position: relative;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+  }
+
+  .floating-input {
+    width: 100%;
+    padding: 12px 50px 12px 20px;
+    font-size: 1rem;
+    border-top: 0px;
+    border-bottom: 1px solid #999999;
+    border-left: 0px;
+    border-right: 0px;
+    background: none;
+    outline: none;
+    transition: border-color 0.3s;
+    color: white;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Garante que use a mesma fonte do site */
+  }
+
+  .floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 12px;
+    color: #999999;
+    padding: 0 5px;
+    transition: 0.3s ease all;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 1rem;
+  }
+
+  .char-count {
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    font-size: 0.75rem;
+    color: #666;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    margin-right: 0;
+  }
+
+  /* Estados Ativos */
+  .floating-input:focus { border-color: #ff0000; }
+  
+  .floating-input:focus ~ .floating-label,
+  .floating-input:not(:placeholder-shown) ~ .floating-label {
+    top: -10px; font-size: 0.85rem; color: #ff0000;
+  }
+
+  .floating-input:focus ~ .char-count,
+  .floating-input:not(:placeholder-shown) ~ .char-count { opacity: 1; }
+
+  /* Hack Autocomplete */
+  .floating-input:-webkit-autofill,
+  .floating-input:-webkit-autofill:hover, 
+  .floating-input:-webkit-autofill:focus, 
+  .floating-input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
+    -webkit-text-fill-color: white !important;
+    border-top: 0px; border-bottom: 1px solid #999999;
+    border-left: 0px; border-right: 0px; caret-color: white; 
+  }
+  .floating-input:-webkit-autofill ~ .floating-label {
+    top: -15px; font-size: 0.85rem; color: #ff0000;
+  }
+</style>
+
+<script>
+  const inputs = document.querySelectorAll(".floating-input");
+
+  inputs.forEach((input) => {
+    let errorTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    const showCustomError = (message: string) => {
+      const wrapper = input.closest(".floating-group");
+      if (wrapper) {
+        const errorSpan = wrapper.querySelector(".error-tooltip");
+        if (errorSpan) {
+          errorSpan.textContent = message;
+          errorSpan.classList.add("visible");
+          if (errorTimeout) clearTimeout(errorTimeout);
+          errorTimeout = setTimeout(() => {
+            errorSpan.classList.remove("visible");
+          }, 4000);
+        }
+      }
+    };
+
+    // --- VALIDAÇÃO DE INVALID ---
+    // Restaurada para o comportamento genérico original
+    input.addEventListener("invalid", (e) => {
+      e.preventDefault(); 
+      const field = e.target as HTMLInputElement;
+
+      if (field.validity.tooShort) {
+        const min = field.getAttribute("minlength");
+        // Voltou a mostrar "Mínimo de X caracteres" mesmo para telefone
+        showCustomError(`Mínimo de ${min || ""} caracteres.`);
+      } else if (field.validity.typeMismatch) {
+        showCustomError("E-mail inválido.");
+      }
+    });
+
+    input.addEventListener("blur", (e) => {
+      const field = e.target as HTMLInputElement;
+      if (field.value.length > 0 && !field.checkValidity()) {
+        field.dispatchEvent(new Event("invalid"));
+      }
+    });
+
+    // --- 1. ONLY LETTERS ---
+    if (input.hasAttribute("data-only-letters")) {
+      input.addEventListener("input", (e) => {
+        const target = e.target as HTMLInputElement;
+        const originalValue = target.value;
+        const cleanValue = originalValue.replace(/[^a-zA-Z\u00C0-\u00FF\s]/g, "");
+        if (originalValue !== cleanValue) {
+          target.value = cleanValue;
+          showCustomError("Digite apenas letras.");
+        }
+      });
+    }
+
+    // --- 2. ONLY NUMBERS (Sem máscara) ---
+    if (input.hasAttribute("data-only-numbers") && !input.hasAttribute("data-mask")) {
+      input.addEventListener("input", (e) => {
+        const target = e.target as HTMLInputElement;
+        const originalValue = target.value;
+        const cleanValue = originalValue.replace(/[^0-9]/g, "");
+        if (originalValue !== cleanValue) {
+          target.value = cleanValue;
+          showCustomError("Digite apenas números.");
+        }
+      });
+    }
+
+    // --- 3. MÁSCARA DE TELEFONE (Com aviso de erro restaurado) ---
+    if (input.getAttribute("data-mask") === "phone") {
+      input.addEventListener("input", (e) => {
+        const target = e.target as HTMLInputElement;
+        const originalValue = target.value;
+
+        // VERIFICAÇÃO ANTES DE LIMPAR:
+        // Se houver qualquer coisa que NÃO seja número e NÃO seja pontuação da máscara (parênteses, traço, espaço)
+        // Então o usuário digitou uma letra ou símbolo inválido.
+        if (/[^0-9\(\)\-\s]/.test(originalValue)) {
+            showCustomError("Digite apenas números.");
+        }
+
+        let value = originalValue.replace(/\D/g, "");
+        value = value.substring(0, 11);
+        value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
+        value = value.replace(/(\d)(\d{4})$/, "$1-$2");
+
+        target.value = value;
+      });
+    }
+
+    // --- CONTADOR ---
+    const maxLength = input.getAttribute("maxlength");
+    if (maxLength) {
+      const wrapper = input.closest(".floating-group");
+      if (wrapper) {
+        const counterSpan = wrapper.querySelector(".char-count");
+        if (counterSpan) {
+          const updateCount = () => {
+            const currentLength = (input as HTMLInputElement).value.length;
+            counterSpan.textContent = `${currentLength}/${maxLength}`;
+          };
+          input.addEventListener("input", updateCount);
+          updateCount();
+        }
+      }
+    }
+  });
+</script>

@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <section class="page-content">
+    <h1>Quem Somos</h1>
+    
+    <div class="texto-sobre">
+      <p>
+        A <strong>EDAG Treinamentos</strong> nasceu com a missão de transformar o setor de transportes através do conhecimento.
+      </p>
+      <p>
+        Com anos de experiência nas estradas e na gestão de frotas, entendemos que a segurança não é apenas uma regra, mas um valor que salva vidas. Nossos instrutores são especialistas dedicados a formar condutores mais conscientes e preparados.
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-content {
+    max-width: 800px;
+    margin: 0 auto; /* Centraliza o bloco na tela */
+    padding: 60px 20px; /* Espaçamento interno */
+    min-height: 60vh; /* Garante que o footer não suba se o texto for curto */
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    color: #ff0000; /* Destaque em vermelho */
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6; /* Altura da linha para leitura confortável */
+    margin-bottom: 20px;
+    color: #e0e0e0; /* Texto claro (quase branco) para o fundo escuro */
+  }
+</style>

@@ -1,0 +1,39 @@
+.shiny-text {
+    color: #ff0000af;
+    /* Adjust this color to change intensity/style */
+    background: linear-gradient(120deg,
+            rgba(255, 255, 255, 0) 40%,
+            rgba(255, 255, 255, 0.924) 50%,
+            rgba(255, 255, 255, 0) 60%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: inline-block;
+    animation: shine 5s linear infinite;
+
+    padding: 20px 50px;
+    /* Padding maior para destaque */
+    border-radius: 50px;
+    /* Cantos arredondados iguais aos inputs */
+}
+
+@keyframes shine {
+    0% {
+        background-position: 100%;
+    }
+
+    100% {
+        background-position: -100%;
+    }
+}
+
+.shiny-text.disabled {
+    animation: none;
+}
+
+.shiny-text:hover {
+    color: #ffffffaf;
+    /* Vermelho mais escuro */
+    text-shadow: 0 0px 9px rgb(255, 255, 255);
+    /* Sombra vermelha brilhante (Glow) */
+}

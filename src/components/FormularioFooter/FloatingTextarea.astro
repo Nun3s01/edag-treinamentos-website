@@ -1,0 +1,187 @@
+---
+import ErrorTooltip from "../ErrorTooltip.astro";
+
+// Recebe 'rows' para definir a altura inicial, e removemos máscaras de telefone/números que não fazem sentido aqui
+const {
+    label,
+    id,
+    maxlength,
+    minlength,
+    required,
+    rows = 4,
+    ...rest
+} = Astro.props;
+---
+
+<div class="floating-group" style="width: 100%;">
+    <textarea
+        id={id}
+        name={id}
+        placeholder=" "
+        class="floating-input"
+        maxlength={maxlength}
+        minlength={minlength}
+        required={required}
+        rows={rows}
+        {...rest}></textarea>
+
+    <label for={id} class="floating-label">
+    {label}
+    </label>
+
+    {maxlength && <span class="char-count">0/{maxlength}</span>}
+
+    <ErrorTooltip />
+</div>
+
+<style>
+    .floating-group {
+    position: relative;
+    margin-bottom: 35px; /* Margem um pouco maior pois o textarea é alto */
+    box-sizing: border-box;
+    }
+
+  /* --- ESTILOS DO TEXTAREA (MUDANÇAS AQUI) --- */
+    .floating-input {
+    width: 100%;
+    padding: 12px 50px 12px 20px; /* Mantém o padding para não bater no contador */
+    font-size: 0.9rem;
+    background: none;
+    outline: none;
+    transition: border-color 0.3s;
+    color: white;
+    box-sizing: border-box;
+
+    /* MUDANÇA 1: Borda Completa */
+    border: 1px solid #999999;
+
+    /* MUDANÇA 2: Garante que o ícone de redimensionar apareça */
+    resize: vertical; /* Permite redimensionar apenas na vertical (padrão de bons sites) */
+    font-family: 'Poppins', sans-serif; /* Garante que use a mesma fonte do site */
+    }
+
+  /* Estilo do Label */
+    .floating-label {
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    top: 12px; /* Posição inicial no topo */
+    color: #999999;
+    padding: 0 5px;
+    background-color: #13151a; /* Cor de fundo para "cortar" a borda superior */
+    transition: 0.3s ease all;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    }
+
+    .char-count {
+    position: absolute;
+    bottom: -25px; /* Fica fora da caixa, na parte de baixo */
+    right: 0;
+    font-size: 0.75rem;
+    color: #666;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    margin-right: 0;
+    }
+
+  /* --- Estados Ativos --- */
+    .floating-input:focus {
+    border-color: #ff0000;
+    /* Opcional: adicionar uma sombra vermelha suave ao focar */
+    box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.2);
+    }
+
+  /* Move o label para cima (Flutuando) */
+    .floating-input:focus ~ .floating-label,
+    .floating-input:not(:placeholder-shown) ~ .floating-label {
+        top: -10px; /* Sobe para a linha da borda superior */
+        font-size: 0.7rem;
+        color: #ff0000;
+    }
+
+  /* Mostra o contador */
+    .floating-input:focus ~ .char-count,
+    .floating-input:not(:placeholder-shown) ~ .char-count {
+        opacity: 1;
+    }
+
+  /* Hack Autocomplete (Ajustado para borda completa) */
+    .floating-input:-webkit-autofill,
+    .floating-input:-webkit-autofill:hover,
+    .floating-input:-webkit-autofill:focus,
+    .floating-input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px #1a1a1a inset !important;
+        -webkit-text-fill-color: white !important;
+        border: 1px solid #999999; /* Mantém borda completa */
+        caret-color: white;
+    }
+    .floating-input:-webkit-autofill ~ .floating-label {
+        top: -10px;
+        font-size: 0.7rem;
+        color: #ff0000;
+    }
+</style>
+
+<script>
+  // O Script é idêntico ao do Input, pois ele pega pela classe '.floating-input'
+  // que usamos nos dois componentes.
+    const inputs = document.querySelectorAll(".floating-input");
+
+    inputs.forEach((input) => {
+        let errorTimeout: ReturnType<typeof setTimeout> | undefined;
+
+        const showCustomError = (message: string) => {
+        const wrapper = input.closest(".floating-group");
+        if (wrapper) {
+            const errorSpan = wrapper.querySelector(".error-tooltip");
+            if (errorSpan) {
+                errorSpan.textContent = message;
+                errorSpan.classList.add("visible");
+                if (errorTimeout) clearTimeout(errorTimeout);
+                    errorTimeout = setTimeout(() => {
+                    errorSpan.classList.remove("visible");
+                }, 4000);
+            }
+        }
+    };
+
+        input.addEventListener("invalid", (e) => {
+            e.preventDefault();
+            const field = e.target as HTMLInputElement | HTMLTextAreaElement;
+            if (field.validity.tooShort) {
+                const min = field.getAttribute("minlength");
+                showCustomError(`Mínimo de ${min || ""} caracteres.`);
+            } else if (field.validity.valueMissing) {
+                showCustomError("Este campo é obrigatório.");
+            }
+        });
+
+    input.addEventListener("blur", (e) => {
+        const field = e.target as HTMLInputElement | HTMLTextAreaElement;
+        if (field.value.length > 0 && !field.checkValidity()) {
+            field.dispatchEvent(new Event("invalid"));
+        }
+    });
+
+    const maxLength = input.getAttribute("maxlength");
+    if (maxLength) {
+        const wrapper = input.closest(".floating-group");
+        if (wrapper) {
+            const counterSpan = wrapper.querySelector(".char-count");
+            if (counterSpan) {
+                const updateCount = () => {
+                const currentLength = (
+                    input as HTMLInputElement | HTMLTextAreaElement
+                ).value.length;
+                counterSpan.textContent = `${currentLength}/${maxLength}`;
+                };
+                input.addEventListener("input", updateCount);
+                updateCount();
+            }
+        }
+    }
+    });
+</script>

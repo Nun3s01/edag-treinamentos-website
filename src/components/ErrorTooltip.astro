@@ -1,0 +1,53 @@
+---
+// Aceita uma classe extra caso precise ajustar posição em algum lugar específico
+const { class: className } = Astro.props;
+---
+
+<span class:list={["error-tooltip", className]}>
+    <slot>Erro</slot>
+</span>
+
+<style>
+  /* --- ESTILO DO BALÃO (TOOLTIP) --- */
+    .error-tooltip {
+    /* Posição e Flutuação */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    z-index: 10;
+
+    /* Visual */
+    background-color: #333333;
+    color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+
+    /* Animação */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    pointer-events: none; /* Não atrapalha o clique */
+
+    min-width: 200px;
+    }
+
+  /* A SETINHA (TRIÂNGULO) */
+    .error-tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 20px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: transparent transparent #333333 transparent;
+    }
+
+  /* Classe para mostrar (o :global é necessário pois a classe vem do JS de outro arquivo) */
+    .error-tooltip.visible {
+    opacity: 1;
+    transform: translateY(0);
+    }
+</style>

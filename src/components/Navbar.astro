@@ -1,0 +1,67 @@
+---
+import logoEdag from '../assets/edag-logo.png';
+---
+
+<header>
+    <nav>
+        <img src={logoEdag.src} alt="EDAG Treinamentos em Transportes" width="180px" />
+        <ul class="list-header-navbar">
+            <li class="item-list-header-navbar"><a href="/">Página Inicial</a></li>
+            <li class="item-list-header-navbar"><a href="/sobre-nos">Quem Somos</a></li>
+            <li class="item-list-header-navbar"><a href="/#depoimentos">Depoimentos</a></li>
+            <li class="item-list-header-navbar"><a href="#contato">Fale Conosco</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+
+    header {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        background-color: #ffffffff;
+        box-shadow: 0 -30px 45px #000000;
+        backdrop-filter: blur(3.5px);
+        z-index: 999;
+    }
+    nav {
+        margin: 0 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .list-header-navbar {
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        list-style-type: none;
+    }
+    .item-list-header-navbar {
+        margin: 15px;
+    }
+    a {
+        padding: 2px 0;
+        color: #13151a;
+        text-decoration: none;
+        font-weight: bold;
+        background-color: transparent;
+        border-bottom: 2px solid transparent;
+    }
+
+
+    a:hover {
+        transition: all 0.3s ease-in-out;
+        padding: 2px 0;
+        border-bottom: 2px solid #ff0000;
+    }
+
+</style>
