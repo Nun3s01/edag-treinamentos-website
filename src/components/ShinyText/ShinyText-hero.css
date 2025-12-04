@@ -1,5 +1,5 @@
 .shiny-text {
-    color: #ff0000af;
+    color: #ff0000d2;
     /* Adjust this color to change intensity/style */
     background: linear-gradient(120deg,
             rgba(255, 255, 255, 0) 40%,
@@ -32,7 +32,7 @@
 }
 
 .shiny-text:hover {
-    color: #ffffffaf;
+    color: #ffffffd2;
     /* Vermelho mais escuro */
     text-shadow: 0 0px 9px rgb(255, 255, 255);
     /* Sombra vermelha brilhante (Glow) */

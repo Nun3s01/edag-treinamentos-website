@@ -1,4 +1,17 @@
 ---
+import LogoLoop from "./LogoLoop/LogoLoop.tsx";
+
+const imageLogos = [
+    { src: "/logos/Google.png", alt: "Google"},
+    { src: "/logos/Magalu.png", alt: "Magalu"},
+    { src: "/logos/Amazon.png", alt: "Amazon"},
+    { src: "/logos/Samsung.png", alt: "Samsung"},
+    { src: "/logos/MercadoLivre.png", alt: "Mercado Livre"},
+    { src: "/logos/Shopee.png", alt: "Shopee"},
+];
+
+
+
 // Dados dos serviços (Fica fácil editar depois)
 const services = [
     {
@@ -19,11 +32,15 @@ const services = [
 ];
 ---
 
+
 <section class="services-section">
     <div class="container">
         <div class="section-header">
-        <h2>Nossos Treinamentos</h2>
-        <p>Capacitação completa para elevar o nível da sua frota.</p>
+            <div class="title-container">
+                <h2>Treinamento e Capacitação</h2>
+                <hr>
+            </div>
+            <p>Nossa responsabilidade é elevar o nível da sua frota.</p>
         </div>
 
         <div class="cards-grid">
@@ -88,12 +105,24 @@ const services = [
         }
         </div>
     </div>
-    </section>
+</section>
+
+<section>
+
+    <div style={{ height: '200px', position: 'relative', overflow: 'hidden'}}>
+        <LogoLoop logos={imageLogos} speed={30} direction="left" logoHeight={48} gap={120} hoverSpeed={30} fadeOut fadeOutColor="#f2f2f2" ariaLabel="Partners enterprises" client:visible />
+    </div>
+
+</section>
+
+
 
 <style>
     .services-section {
         padding: 6rem 20px;
-        color: white;    }
+        color: white;
+        background-color: #f2f2f2;
+    }
 
     .container {
         max-width: 1280px;
@@ -106,16 +135,27 @@ const services = [
         margin-bottom: 4rem;
     }
 
+    .title-container {
+        width: 50%;        
+    }
+
     .section-header h2 {
         font-size: 2.5rem;
-        color: #ff0000;
+        color: transparent;
+        background-color: #1e1e1e;
         margin-bottom: 1rem;
+        text-align: center;
+        text-shadow: 0 0 10px #0000002c;
+        -webkit-background-clip: text;
+            -moz-background-clip: text;
+                background-clip: text;
     }
     
     .section-header p {
         color: transparent;
         text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
         font-size: 1.3rem;
+        text-align: right;
         background-color: #565656;
         -webkit-background-clip: text;
             -moz-background-clip: text;

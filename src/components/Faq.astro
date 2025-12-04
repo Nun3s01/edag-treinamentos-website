@@ -1,0 +1,176 @@
+---
+const faqs = [
+    {
+        question: "Os certificados são válidos em todo o território nacional?",
+        answer: "Sim! Todos os nossos treinamentos seguem rigorosamente as normas vigentes (CONTRAN, MTE, DENATRAN) e os certificados são reconhecidos em todo o Brasil."
+    },
+    {
+        question: "Vocês realizam treinamentos 'In-Company'?",
+        answer: "Com certeza. Podemos levar nossa estrutura e instrutores até a sua empresa para treinar sua equipe sem que eles precisem se deslocar, otimizando o tempo da sua operação."
+    },
+    {
+        question: "Qual a duração média dos cursos?",
+        answer: "A carga horária varia conforme o curso. Cursos de atualização costumam levar 8h a 16h, enquanto formações completas podem chegar a 50h. Consulte a página de cada serviço para detalhes."
+    },
+    {
+        question: "É possível parcelar o pagamento?",
+        answer: "Sim, trabalhamos com diversas formas de pagamento, incluindo parcelamento no cartão de crédito e faturamento para empresas (mediante análise de cadastro)."
+    },
+    {
+        question: "Como faço para agendar um treinamento?",
+        answer: "É muito simples. Basta preencher o formulário de contato abaixo, clicar no botão do WhatsApp no rodapé ou nos ligar. Nossa equipe comercial retornará rapidamente."
+    }
+];
+---
+
+<section class="faq-section">
+    <div class="container">
+        
+        <div class="section-header">
+        <span class="tag">Dúvidas</span>
+        <h2>Perguntas Frequentes</h2>
+        </div>
+
+        <div class="accordion">
+        {faqs.map((faq) => (
+            <details class="faq-item">
+            <summary class="faq-title">
+                {faq.question}
+                <span class="icon">+</span>
+            </summary>
+            <div class="faq-content">
+                <p>{faq.answer}</p>
+            </div>
+            </details>
+        ))}
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .faq-section {
+        padding: 6rem 20px;
+        background-color: #f2f2f2;
+        color: white;
+    }
+
+    .container {
+        max-width: 800px; /* FAQ geralmente é mais estreito para facilitar a leitura */
+        margin: 0 auto;
+    }
+
+    /* Cabeçalho */
+    .section-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .tag {
+        display: inline-block;
+        color: #ff0000;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin: 0;
+        color: #0f0f0f;
+    }
+
+    /* Accordion Styles */
+    .accordion {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .faq-item {
+        background: #1e1e1e;
+        border: 1px solid #333;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+
+    .faq-item[open] {
+        border-color: #ff0000; /* Borda vermelha quando aberto */
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .faq-title {
+        padding: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        list-style: none; /* Remove a setinha padrão feia do browser */
+        transition: color 0.3s;
+    }
+
+    /* Remove setinha padrão no Chrome/Safari */
+    .faq-title::-webkit-details-marker {
+        display: none;
+    }
+
+    .faq-title:hover {
+        color: #ff0000;
+    }
+
+    /* O Ícone (+) */
+    .icon {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #ff0000;
+        transition: transform 0.3s ease;
+        line-height: 1;
+    }
+
+    /* Rotação do ícone quando aberto */
+    .faq-item[open] .icon {
+        transform: rotate(45deg); /* Vira um X */
+    }
+
+    /* Conteúdo da Resposta */
+    .faq-content {
+        padding: 0 20px 20px 20px;
+        color: #ccc;
+        line-height: 1.6;
+        font-size: 1rem;
+        /* Animação simples de entrada */
+        animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        h2 { font-size: 2rem; }
+        .faq-title { font-size: 1rem; }
+    }
+</style>
+
+<script>
+    // Lógica para o efeito "Sanfona" (Fechar um quando abrir outro)
+    const details = document.querySelectorAll("details");
+
+    details.forEach((targetDetail) => {
+        targetDetail.addEventListener("click", () => {
+        // Fecha todos os outros detalhes que não sejam o que foi clicado
+        details.forEach((detail) => {
+            if (detail !== targetDetail) {
+            detail.removeAttribute("open");
+            }
+        });
+        });
+    });
+</script>

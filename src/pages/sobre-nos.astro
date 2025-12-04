@@ -3,40 +3,209 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <section class="page-content">
-    <h1>Quem Somos</h1>
-    
-    <div class="texto-sobre">
-      <p>
-        A <strong>EDAG Treinamentos</strong> nasceu com a missão de transformar o setor de transportes através do conhecimento.
-      </p>
-      <p>
-        Com anos de experiência nas estradas e na gestão de frotas, entendemos que a segurança não é apenas uma regra, mas um valor que salva vidas. Nossos instrutores são especialistas dedicados a formar condutores mais conscientes e preparados.
-      </p>
+  <header class="page-header">
+    <div class="container">
+      <h1>Quem Somos</h1>
+      <hr>
+      <p class="lead">Conheça a história e os valores que movem a EDAG.</p>
+    </div>
+  </header>
+
+  <section class="about-content">
+    <div class="container split-layout">
+      
+      <div class="text-block">
+        <h2>Mais que treinamentos, salvamos vidas.</h2>
+        <p>
+          A <strong>EDAG Treinamentos</strong> nasceu da necessidade de transformar o trânsito brasileiro através da educação. Com mais de 10 anos de experiência no setor logístico, percebemos que a teoria de sala de aula não era suficiente para a realidade das estradas.
+        </p>
+        <p>
+          Nossa metodologia une o rigor técnico exigido pela legislação com a vivência prática do dia a dia. Nossos instrutores não são apenas professores; são profissionais que conhecem cada desafio que um motorista enfrenta ao volante.
+        </p>
+        <p>
+          Hoje, somos referência em capacitação de frotas, ajudando empresas a reduzir custos operacionais e, o mais importante, garantindo que cada colaborador volte para casa em segurança.
+        </p>
+      </div>
+
+      <div class="image-block">
+        <div class="img-placeholder">
+          <span>Imagem da Equipe / Sede</span>
+        </div>
+      </div>
+
     </div>
   </section>
+
+  <section class="values-section">
+    <div class="container">
+      <div class="values-grid">
+        
+        <div class="value-card">
+          <h3>Missão</h3>
+          <p>Capacitar profissionais do transporte com excelência, promovendo um trânsito mais seguro, humano e eficiente.</p>
+        </div>
+
+        <div class="value-card">
+          <h3>Visão</h3>
+          <p>Ser a maior referência nacional em treinamentos de trânsito e segurança viária até 2030.</p>
+        </div>
+
+        <div class="value-card">
+          <h3>Valores</h3>
+          <ul>
+            <li>Segurança em primeiro lugar</li>
+            <li>Ética e Transparência</li>
+            <li>Inovação Pedagógica</li>
+            <li>Compromisso com a Vida</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </Layout>
 
 <style>
-  .page-content {
-    max-width: 800px;
-    margin: 0 auto; /* Centraliza o bloco na tela */
-    padding: 60px 20px; /* Espaçamento interno */
-    min-height: 60vh; /* Garante que o footer não suba se o texto for curto */
+  /* --- CABEÇALHO --- */
+  .page-header {
+    background-color: #f2f2f2;
+    padding: 6rem 20px 4rem 20px;
+    text-align: center;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   h1 {
-    font-size: 2.5rem;
-    color: #ff0000; /* Destaque em vermelho */
-    margin-bottom: 30px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 10px;
+    font-size: 3rem;
+    color: #ff0000;
+    margin-bottom: 1rem;
   }
 
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6; /* Altura da linha para leitura confortável */
-    margin-bottom: 20px;
-    color: #e0e0e0; /* Texto claro (quase branco) para o fundo escuro */
+  .lead {
+    color: transparent;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+    font-size: 1.3rem;
+    text-align: right;
+    background-color: #565656;
+    -webkit-background-clip: text;
+        -moz-background-clip: text;
+            background-clip: text;
+  }
+
+  /* --- CONTEÚDO (TEXTO + IMAGEM) --- */
+  .about-content {
+    padding: 5rem 20px;
+    background-color: #f2f2f2;
+    color: #13151a;
+  }
+
+  .split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .text-block h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .text-block p {
+    color: #13151a;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+  }
+
+  /* Placeholder da Imagem (Pode substituir por <img> depois) */
+  .img-placeholder {
+    width: 100%;
+    height: 400px;
+    background-color: #222;
+    border: 2px dashed #444;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #555;
+    font-weight: 600;
+  }
+
+  /* --- VALORES (GRID) --- */
+  .values-section {
+    padding: 5rem 20px;
+    background-color: #f2f2f2;
+    height: 500px;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .value-card {
+    background: #1e1e1e;
+    padding: 40px;
+    border-radius: 8px;
+    border-top: 4px solid #ff0000; /* Detalhe vermelho no topo */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .value-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .value-card h3 {
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .value-card p, .value-card li {
+    color: #ccc;
+    line-height: 1.6;
+  }
+
+  .value-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .value-card li {
+    margin-bottom: 10px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .value-card li::before {
+    content: "•";
+    color: #ff0000;
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+
+  /* --- RESPONSIVIDADE --- */
+  @media (max-width: 900px) {
+    .split-layout {
+      grid-template-columns: 1fr; /* Vira uma coluna só */
+    }
+
+    .img-placeholder {
+      height: 300px; /* Menor no celular */
+    }
+
+    h1 { font-size: 2.5rem; }
   }
 </style>

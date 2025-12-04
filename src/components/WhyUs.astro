@@ -1,0 +1,191 @@
+<section class="why-us-section">
+    <div class="container">
+        
+        <div class="content-text">
+        <span class="tag">Diferenciais</span>
+        <h2>Por que escolher a <span class="highlight">EDAG</span>?</h2>
+        <p>
+            Não entregamos apenas certificados, entregamos competência. 
+            Nossa metodologia une a teoria exigida por lei com a prática 
+            necessária para o dia a dia nas estradas.
+        </p>
+        
+        <a href="#contato" class="btn-link">Agende uma conversa</a>
+        </div>
+
+        <div class="features-grid">
+        
+        <div class="feature-item">
+            <div class="icon-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div>
+            <h3>Instrutores Certificados</h3>
+            <p>Profissionais com vivência real de estrada e logística.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="icon-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div>
+            <h3>Metodologia Prática</h3>
+            <p>Foco total na aplicação do conhecimento no dia a dia.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="icon-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div>
+            <h3>Certificado Válido</h3>
+            <p>Reconhecido em todo o território nacional.</p>
+            </div>
+        </div>
+
+        <div class="feature-item">
+            <div class="icon-check">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
+            <div>
+            <h3>Flexibilidade</h3>
+            <p>Treinamentos in-company ou em nossa sede.</p>
+            </div>
+        </div>
+
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .why-us-section {
+        padding: 8rem 20px;
+        background-color: #13151a; /* Um tom levemente mais claro que o fundo padrão para destacar */
+        color: white;
+    }
+
+    .container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Divide a tela em 2 */
+        gap: 60px;
+        align-items: center;
+    }
+
+    /* --- LADO ESQUERDO --- */
+    .tag {
+        display: inline-block;
+        background-color: rgba(255, 0, 0, 0.1);
+        color: #ff0000;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+    }
+
+    .highlight {
+        color: #ff0000;
+    }
+
+    .content-text p {
+        color: #ccc;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        max-width: 500px;
+    }
+
+    .btn-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        border-bottom: 2px solid #ff0000;
+        padding-bottom: 2px;
+        transition: color 0.2s;
+    }
+
+    .btn-link:hover {
+        color: #ff0000;
+    }
+
+    /* --- LADO DIREITO (GRID DE PONTOS) --- */
+    .features-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 colunas de itens */
+        gap: 40px;
+    }
+
+    .feature-item {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .icon-check {
+        width: 40px;
+        height: 40px;
+        background-color: #ff0000;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+    }
+
+    h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .feature-item p {
+        font-size: 0.9rem;
+        color: #aaa;
+        line-height: 1.5;
+    }
+
+    /* --- RESPONSIVIDADE --- */
+    @media (max-width: 900px) {
+        .container {
+        grid-template-columns: 1fr; /* Vira uma coluna só */
+        text-align: center;
+        }
+
+        .content-text p {
+        margin: 0 auto 3rem auto; /* Centraliza o parágrafo */
+        }
+
+        .features-grid {
+        text-align: left; /* Mantém os itens alinhados à esquerda para leitura */
+        }
+        
+        .feature-item {
+        align-items: center; /* Centraliza ícone e texto no mobile */
+        text-align: center;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .features-grid {
+        grid-template-columns: 1fr; /* Um item embaixo do outro no celular */
+        }
+        
+        h2 {
+        font-size: 2.5rem;
+        }
+    }
+</style>

@@ -1,0 +1,149 @@
+---
+const testimonials = [
+    {
+        name: "Ricardo Mendes",
+        role: "Gestor de Frotas - Logística ViaRápida",
+        text: "A redução de custos com manutenção e combustível foi visível logo no primeiro mês após o treinamento. A equipe da EDAG é extremamente técnica e didática.",
+        stars: 5
+    },
+    {
+        name: "Ana Paula Souza",
+        role: "Diretora Operacional - TransNorte",
+        text: "Contratamos a EDAG para atualizar nossa equipe sobre a nova legislação. O feedback dos motoristas foi excelente, sentiram-se valorizados e mais seguros.",
+        stars: 5
+    },
+    {
+        name: "Carlos Eduardo",
+        role: "Motorista Autônomo",
+        text: "Já tenho 15 anos de estrada, mas o curso de Direção Defensiva me ensinou técnicas que eu desconhecia. Recomendo para todo profissional que leva a sério sua profissão.",
+        stars: 5
+    }
+];
+---
+
+<section class="testimonials-section" id="depoimentos">
+    <div class="container">
+        
+        <div class="section-header">
+        <span class="tag">Depoimentos</span>
+        <h2>O que dizem nossos parceiros</h2>
+        </div>
+
+        <div class="testimonials-grid">
+        {testimonials.map((item) => (
+            <div class="review-card">
+            <div class="quote-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="currentColor" class="icon"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z"></path></svg>
+            </div>
+
+            <p class="review-text">"{item.text}"</p>
+            
+            <div class="review-footer">
+                <div class="stars">
+                {Array.from({ length: item.stars }).map(() => (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#ff0000" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                ))}
+                </div>
+                <h4>{item.name}</h4>
+                <span class="role">{item.role}</span>
+            </div>
+            </div>
+        ))}
+        </div>
+
+    </div>
+</section>
+
+<style>
+    .testimonials-section {
+        padding: 3rem 20px;
+        justify-items: center;
+        align-items: center;
+        /* Um gradiente sutil para diferenciar do fundo chapado */
+        background: linear-gradient(180deg, #13151a 0%, #0f0f0f 100%);
+        color: white;
+    }
+
+    .container {
+        margin: 6rem 0;
+        max-width: 1280px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .tag {
+        display: inline-block;
+        color: #ff0000;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        margin: 0;
+    }
+
+    /* Grid */
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    /* Card */
+    .review-card {
+        background: #1a1a1a;
+        padding: 40px 30px;
+        border-radius: 8px;
+        border: 1px solid #333;
+        position: relative;
+        transition: transform 0.3s ease;
+    }
+
+    .review-card:hover {
+        transform: translateY(-5px);
+        border-color: #444;
+    }
+
+    .quote-icon {
+        color: #333; /* Aspas discretas no fundo */
+        margin-bottom: 20px;
+    }
+
+    .review-text {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #ddd;
+        margin-bottom: 30px;
+        font-style: italic;
+    }
+
+    .review-footer h4 {
+        color: white;
+        font-size: 1.1rem;
+        margin: 10px 0 5px 0;
+    }
+
+    .role {
+        color: #888;
+        font-size: 0.9rem;
+    }
+
+    .stars {
+        display: flex;
+        gap: 2px;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+        .section-header h2 {
+        font-size: 2rem;
+        }
+    }
+</style>
