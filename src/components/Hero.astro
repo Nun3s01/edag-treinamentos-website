@@ -5,7 +5,7 @@ import RotatingText from './RotatingText/RotatingText.tsx';
 import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 ---
 
-<section class="hero-section">
+<section class="hero-section" id="pagina-inicial">
 
   <video autoplay muted loop playsinline class="video-bg">
     <source src="/videos/hero-video.mp4" type="video/mp4" />
@@ -78,8 +78,6 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 
 <style>
   .hero-section {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
     padding-bottom: 23px;
     position: relative; /* Necessário para segurar os elementos absolutos */
     height: 80vh;
@@ -93,12 +91,11 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
     overflow: hidden; /* Corta o vídeo se ele sobrar nas bordas */;
     border-bottom: 1px solid #000000;
     box-shadow: 0 1px 10px #000000;
+    z-index: -5;
   }
   
   /* Estilo do Vídeo */
   .video-bg {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
     position: absolute; /* ISSO É O MAIS IMPORTANTE: Tira o vídeo da fila */
     top: 0;
     left: 0;
@@ -111,8 +108,6 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 
   /* Estilo da Máscara Escura */
   .overlay {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
     position: absolute;
     top: 0;
     left: 0;
