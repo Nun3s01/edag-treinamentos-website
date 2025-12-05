@@ -16,42 +16,7 @@ import Footer from '../components/Footer.astro';
 		<Navbar />
 		<slot />
 		<Footer />
-    <script>
-      import Lenis from 'lenis';
-      
-      // 1. Inicializa o Lenis
-      const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-      });
-
-      // 2. Loop de animação
-      function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-
-      requestAnimationFrame(raf);
-
-      // 3. CAPTURA DE CLIQUES (Versão Robusta)
-      // Ouve cliques no site inteiro
-      document.addEventListener('click', (e) => {
-        // Verifica se o que foi clicado está dentro de um link <a>
-        // (Isso resolve casos onde você clica num ícone ou texto dentro do link)
-        const link = (e.target as HTMLElement).closest('a');
-        
-        if (link) {
-          const href = link.getAttribute('href');
-          
-          // Se o link existe e começa com # (ex: #contato)
-          if (href && href.startsWith('#') && href.length > 1) {
-            e.preventDefault(); // Impede o "pulo" seco padrão do navegador
-            lenis.scrollTo(href); // Manda o Lenis deslizar suavemente
-          }
-        }
-      });
-    </script>
+    <script src="../scripts/lenis-scroll.ts"></script>
 	</body>
 </html>
 
@@ -106,6 +71,7 @@ import Footer from '../components/Footer.astro';
     font-weight: normal;
     background-color: #f2f2f2;
 	  color: #13151a;
+    scroll-behavior: smooth;
     scroll-padding-top: 100px;
   }
 
