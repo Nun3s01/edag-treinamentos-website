@@ -6,7 +6,6 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 ---
 
 <section class="hero-section" id="pagina-inicial">
-
   <video autoplay muted loop playsinline class="video-bg">
     <source src="/videos/hero-video.mp4" type="video/mp4" />
   </video>
@@ -63,10 +62,8 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
       delay={1.5}
       client:visible
     >
-      <div>
-        <div class="btn-cta-container">
-          <a href="#contato" class="btn-cta"><ShinyText text="Fale com um Especialista " disabled={false} speed={3.5} className='custom-class' client:visible /></a>
-        </div>
+      <div class="btn-cta-container">
+        <a href="#contato" class="btn-cta"><ShinyText text="Fale com um Especialista " disabled={false} speed={3.5} className='custom-class' client:visible /></a>
       </div>
     </AnimatedContent>
   </div>
@@ -78,20 +75,18 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 
 <style>
   .hero-section {
-    padding-bottom: 23px;
     position: relative; /* Necessário para segurar os elementos absolutos */
     height: 80vh;
     min-height: 750px;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: left;
     color: white;
     background: transparent;
     overflow: hidden; /* Corta o vídeo se ele sobrar nas bordas */;
     border-bottom: 1px solid #000000;
     box-shadow: 0 1px 10px #000000;
-    z-index: -5;
+    z-index: 100;
   }
   
   /* Estilo do Vídeo */
@@ -120,10 +115,10 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 
   /* Conteúdo */
   .hero-content {
+    margin-top: -250px;
     position: relative;
-    z-index: 2; /* Garante que o texto fique no topo da pilha */
+    z-index: 100; /* Garante que o texto fique no topo da pilha */
     max-width: 900px;
-    padding: 0 20px;
   }
 
   .slogan-text-hero {

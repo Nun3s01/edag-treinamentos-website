@@ -19,7 +19,11 @@ const year = new Date().getFullYear();
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
             </svg>
-            <p class="desc-content-tel-email">(19) 99999-9999</p>
+            <div class="num-telefones">
+              <p class="desc-content-tel-email">(19) 99304-7043</p>
+              <p class="desc-content-tel-email">(19) 98832-9319</p>
+            </div>
+            
           </div>
           <div class="content-tel-email">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -46,31 +50,40 @@ const year = new Date().getFullYear();
     <hr class="divisor" />
 
     <div class="bottom-bar">
-      <p class="copyright">
-        &copy; {year} EDAG Treinamentos. Todos os direitos reservados.
-      </p>
-      
-      <ul class="socials">
-        <li>
-          <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
-          </a>
-        </li>
+      <div class="socials-container">
+        <ul class="socials">
+          <li>
+            <a href="https://www.instagram.com/" aria-label="Instagram" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            </a>
+          </li>
+  
+          <li>
+            <a href="https://br.linkedin.com/" aria-label="LinkedIn" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </div>
 
-        <li>
-          <a href="https://br.linkedin.com/" aria-label="LinkedIn" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-              <rect x="2" y="9" width="4" height="12"></rect>
-              <circle cx="4" cy="4" r="2"></circle>
-            </svg>
-          </a>
-        </li>
-      </ul>
+
+      <div class="copyright-termos-politicas-container">
+        <div class="copyright-container">
+          <p class="copyright">&copy; {year} EDAG Treinamentos. Todos os direitos reservados. Edag Treinamentos em Transportes - CNPJ: 41.805.572/0001-25</p>
+        </div>
+        <div class="termos-politicas-container">
+          <a href="/termos-de-uso">Termos de Uso</a>
+          <a href="/politica-de-privacidade">Política de Privacidade</a>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
@@ -147,6 +160,11 @@ const year = new Date().getFullYear();
     gap: 10px;
   }
 
+  .num-telefones {
+    display: grid;
+    row-gap: 20px;
+  }
+
 
   /* LADO DIREITO (FORMULÁRIO) */
   .formulario-wrapper {
@@ -167,7 +185,7 @@ const year = new Date().getFullYear();
   .divisor {
     border: 0;
     border-top: 1px solid #333;
-    margin: 5rem 0 2rem 0;
+    margin: 4.5rem 0 2rem 0;
     opacity: 0.5;
   }
 
@@ -179,10 +197,35 @@ const year = new Date().getFullYear();
     gap: 20px;
   }
 
+  .copyright-termos-politicas-container {
+    display: block;
+    width: 70%;
+  }
+
+  .copyright-container {
+    text-align: right;
+  }
+
   .copyright {
     font-size: 0.9rem;
     opacity: 0.8;
     margin: 0;
+  }
+
+  .termos-politicas-container {
+    text-align: right;
+  }
+
+  .termos-politicas-container a {
+    color: #cccccc;
+    text-decoration: underline;
+  }
+
+  .socials-container {
+    display: block;
+    justify-items: center;
+    align-items: center;
+    width: 25%;
   }
 
   .socials {
