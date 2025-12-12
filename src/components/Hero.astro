@@ -5,7 +5,7 @@ import RotatingText from './RotatingText/RotatingText.tsx';
 import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 ---
 
-<section class="hero-section" id="pagina-inicial">
+<section class="hero-section" id="/">
   <video autoplay muted loop playsinline class="video-bg" poster="/videos/hero-poster-background.jpg">
     <source src="/videos/hero-video.mp4" type="video/mp4" />
   </video>
@@ -27,7 +27,7 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
           staggerDuration={0.025}
           splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
           transition={{ type: "spring", damping: 30, stiffness: 400 }}
-          rotationInterval={4000}
+          rotationInterval={6000}
           client:visible
         />
       </div>
@@ -43,7 +43,7 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
           staggerDuration={0.025}
           splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
           transition={{ type: "spring", damping: 30, stiffness: 400 }}
-          rotationInterval={4600}
+          rotationInterval={7000}
           client:visible
         />
       </div>
@@ -120,14 +120,7 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
     z-index: 100; /* Garante que o texto fique no topo da pilha */
     max-width: 900px;
   }
-
-  .slogan-text-hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    user-select: none;
-  }
-
+  
   h1 {
     font-family: 'Poppins', sans-serif;
     margin-top: 180px;
@@ -137,9 +130,16 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
     text-shadow: 0 0px 2px rgb(255, 255, 255);
   }
 
-  p {
-    display: inline-block;
-    margin: 0 4px;
+  .slogan-text-hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+
+  .slogan-text-hero p {
+    display: block;
+    padding: 0 4px;
     align-items: center;
     justify-self: center;
     text-align: center;
@@ -152,12 +152,10 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
     border-radius: 6px;
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
-    width: 120px;
-    box-shadow: inset 0 0 5px #000000b1;
+    width: auto;
   }
 
   .btn-cta-container {

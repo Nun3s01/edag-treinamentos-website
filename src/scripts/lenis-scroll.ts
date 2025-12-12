@@ -1,13 +1,13 @@
 import Lenis from 'lenis';
 
-// 1. Inicializa o Lenis
+// Inicialização básica
 const lenis = new Lenis({
     duration: 1.2,
-    easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true
 });
 
-// 2. Loop de animação
+// Correção 1: Adicionado o tipo ': number' para o parâmetro time
 function raf(time: number) {
     lenis.raf(time);
     requestAnimationFrame(raf);
@@ -15,19 +15,20 @@ function raf(time: number) {
 
 requestAnimationFrame(raf);
 
-// 3. Captura de Cliques (Delegação de Eventos)
-document.addEventListener('click', (e) => {
-    // O 'as HTMLElement' agora funciona perfeitamente aqui
-    const target = e.target as HTMLElement;
-    const link = target.closest('a');
+// Ajuste para âncoras
+// Correção 2: Dizemos ao TS que isso é uma lista de Links (HTMLAnchorElement)
+const anchors = document.querySelectorAll('a[href^="#"]') as NodeListOf<HTMLAnchorElement>;
 
-    if (link) {
-        const href = link.getAttribute('href');
+anchors.forEach((anchor) => {
+    // Usamos Arrow Function '=>' para não ter problemas com o 'this'
+    anchor.addEventListener('click', (e) => {
+        e.preventDefault();
 
-        // Verifica se é um link âncora (começa com #)
-        if (href && href.startsWith('#') && href.length > 1) {
-            e.preventDefault();
-            lenis.scrollTo(href);
+        // Correção 3: Usamos a própria variável 'anchor' em vez de 'this'
+        const targetId = anchor.getAttribute('href');
+
+        if (targetId) {
+            lenis.scrollTo(targetId, { offset: -170 });
         }
-    }
+    });
 });

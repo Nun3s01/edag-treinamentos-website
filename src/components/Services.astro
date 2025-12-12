@@ -30,14 +30,127 @@ const services = [
         icon: "traffic",
     },
 ];
+
+// --- 1. Dados da Tabela (Fácil de editar) ---
+const features = [
+    {
+        name: "Escolinha de Motoristas",
+        cargahor: "24 Hrs",
+        modalidade: "Teórica / Prática",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Condução Segura e Econômica",
+        cargahor: "16 Hrs", 
+        modalidade: "Teórica / Prática",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Direção Defensiva",
+        cargahor: "8 Hrs / 12 Hrs", 
+        modalidade: "Teórica / Prática",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Atualização de Legislação",
+        cargahor: "4 Hrs",
+        modalidade: "Teórica",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "CIPA",
+        cargahor: "20 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: "Comissão Interna de Prevenção de Acidentes"
+    },
+    {
+        name: "Monitor Escolar",
+        cargahor: "12 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Noções de Análise e Interpretação do Disco Tacógrafo",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Atendimento ao Cliente",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Noções de Desenvolvimento de Liderança",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Gestão de Tempo",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Administração de Conflitos",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Noções de Primeiros Socorros",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Prevenção de Incêndio",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "Tecnologia Embarcada",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: ""
+    },
+    {
+        name: "NR 17",
+        cargahor: "4 Hrs",
+        modalidade: "-",
+        certificacao: true,
+        tooltip: "Ergonomia"
+    },
+];
+
+// --- 2. Ícone SVG (Sem bibliotecas externas) ---
+const CheckIcon = `<svg class="icon check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
+const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
 ---
 
 
 <section class="services-section">
-    <div class="container">
+    <div class="services-container">
         <div class="section-header">
-            <div class="title-container">
-                <h2>Treinamento e Capacitação</h2>
+            <div id="treinamentos-e-capacitacao" class="title-container">
+                <h2>Treinamentos e Capacitação</h2>
                 <hr>
             </div>
             <p>Nossa responsabilidade é elevar o nível da sua frota.</p>
@@ -107,20 +220,69 @@ const services = [
     </div>
 </section>
 <section>
-    <div style={{ height: '200px', position: 'relative', overflow: 'hidden'}}>
+    <div style={{ height: '200px', position: 'relative', overflow: 'hidden', }}>
         <LogoLoop logos={imageLogos} speed={30} direction="left" logoHeight={48} gap={120} hoverSpeed={30} fadeOut fadeOutColor="#f2f2f2" ariaLabel="Partners enterprises" client:visible />
     </div>
 </section>
 
 
+<section class="comparison-section">
+    <div class="table-container">
+        <div class="table-wrapper">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th class="table-headers">Treinamentos</th>
+                        <th class="table-headers">Carga Horária</th>
+                        <th class="table-headers">Modalidade</th>
+                        <th class="table-headers">Certificação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {features.map((item) => (
+                        <tr>
+                            <td class="feature-cell">
+                                <span class="feature-name">{item.name}</span>
+                                {item.tooltip && <span class="tooltip">{item.tooltip}</span>}
+                            </td>
+
+                            <td class="default-cell">
+                                <div class="cell-content">
+                                    {<span class="text-value">{item.cargahor}</span>}
+                                </div>
+                            </td>
+
+                            <td class="default-cell">
+                                <div class="cell-content">
+                                    {<span class="text-value">{item.modalidade}</span>}
+                                </div>
+                            </td>
+                            <td class="default-cell">
+                                <div class="cell-content">
+                                    {typeof item.certificacao === 'boolean' 
+                                        ? (item.certificacao ? <span set:html={CheckIcon} /> : <span set:html={XIcon} />)
+                                        : <span class="text-value">{item.certificacao}</span>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <p>Obs.: Formatamos treinamentos com temas conforme sua necessidade!</p>
+        </div>
+    </div>
+</section>
+
 
 <style>
     .services-section {
-        padding: 6rem 20px;
+        padding: 0 20px 6rem 20px;
         background-color: #f2f2f2;
+        color: white;
     }
 
-    .container {
+    .services-container {
         max-width: 1280px;
         margin: 0 auto;
     }
@@ -132,7 +294,8 @@ const services = [
     }
 
     .title-container {
-        width: 50%;        
+        padding-top: 40px;
+        width: 50%;
     }
 
     .section-header h2 {
@@ -143,10 +306,10 @@ const services = [
     }
     
     .section-header p {
-        color: transparent;
-        text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
         font-size: 1.3rem;
         text-align: right;
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
         background-color: #565656;
         -webkit-background-clip: text;
             -moz-background-clip: text;
@@ -236,4 +399,110 @@ const services = [
         grid-template-columns: 1fr; /* Uma coluna no celular */
         }
     }
-</style>
+
+
+
+    /* --- Layout Geral --- */
+    .comparison-section {
+        padding: 4rem 1.5rem;
+    }
+
+    .table-container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* --- Tabela --- */
+    .table-wrapper {
+        width: 100%;
+        position: relative; 
+
+    }
+    .comparison-table {
+        width: 100%;
+    }
+
+
+    /* --- Cabeçalhos das Colunas --- */
+    th {
+    position: sticky;
+    top: 103px; 
+    backdrop-filter: blur(4px);
+            color: #000000 !important;
+    background-color: #d1d1d153 !important;
+        background-clip: border-box !important;
+
+    }
+    .table-headers {
+        padding: 1.5rem;
+        text-align: center;
+        width: 40%;
+        color: transparent;
+        font-size: 1rem;
+        border-bottom: 1px solid #ccc;
+        text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+        background-color: #000000;
+        -webkit-background-clip: text;
+                background-clip: text;
+    }
+
+    /* --- Células do Corpo --- */
+    td {
+        padding: 1.2rem;
+        border-bottom: 1px solid #cccccc5b;
+        vertical-align: middle;
+    }
+
+    .feature-cell {
+        text-align: left;
+    }
+
+    .feature-name {
+        display: block;
+        font-weight: 600;
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .tooltip {
+        display: block;
+        font-size: 0.85rem;
+        color: #888;
+        margin-top: 4px;
+        font-weight: 400;
+    }
+
+    .default-cell {
+        border-right: 1px solid #eee;
+        color: transparent;
+        text-shadow: 0px 2px 3px rgba(255,255,255,0.5);
+        background-color: #565656;
+        -webkit-background-clip: text;
+            -moz-background-clip: text;
+                background-clip: text;
+    }
+
+    .cell-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Texto Livre na tabela */
+    .text-value {
+        font-size: 0.95rem;
+    }
+
+    /* --- Estilização dos Ícones --- */
+    :global(.icon) {
+        width: 24px;
+        height: 24px;
+    }
+    :global(.check) {
+        color: #565656; /* Tem Certificado */
+    }
+    :global(.cross) {
+        color: #565656; /* Não tem Certificado */
+    }
+    </style>
