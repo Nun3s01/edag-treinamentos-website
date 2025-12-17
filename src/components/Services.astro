@@ -1,5 +1,6 @@
 ---
 import LogoLoop from "./LogoLoop/LogoLoop.tsx";
+import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
 
 const imageLogos = [
     { src: "/logos/Google.png", alt: "Google"},
@@ -12,10 +13,10 @@ const imageLogos = [
 
 
 
-// Dados dos serviços (Fica fácil editar depois)
-const services = [
+// Dados dos cards
+const content = [
     {
-        title: "Direção Defensiva",
+        title: "Certificação",
         desc: "Técnicas avançadas para antecipar riscos e prevenir acidentes, garantindo a integridade do condutor e da carga.",
         icon: "shield",
     },
@@ -145,7 +146,19 @@ const CheckIcon = `<svg class="icon check" viewBox="0 0 24 24" fill="none" strok
 const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
 ---
 
-
+<AnimatedContent
+    distance={80}
+    direction="vertical"
+    reverse={false}
+    duration={2.5}
+    ease="power3.out"
+    initialOpacity={0}
+    animateOpacity
+    scale={1}
+    threshold={0.2}
+    delay={0}
+    client:visible
+>
 <section class="services-section">
     <div class="services-container">
         <div class="section-header">
@@ -156,123 +169,97 @@ const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="c
             <p>Nossa responsabilidade é elevar o nível da sua frota.</p>
         </div>
 
-        <div class="cards-grid">
-        {
-            services.map((service) => (
-            <div class="card">
-                <div class="icon-box">
-                {service.icon === "shield" && (
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    >
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                    </svg>
-                )}
-                {service.icon === "leaf" && (
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    >
-                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
-                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
-                    </svg>
-                )}
-                {service.icon === "traffic" && (
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    >
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" />
-                    </svg>
-                )}
+        <div class="two-grid-container">
+            <section class="comparison-section">
+                <div class="table-container">
+                    <div class="table-wrapper">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th id="table-headers-treinamentos" class="table-headers">Treinamentos</th>
+                                    <th id="table-headers-cargahoraria" class="table-headers">Carga Horária</th>
+                                    <th id="table-headers-modalidade" class="table-headers">Modalidade</th>
+                                    <th id="table-headers-certificacao" class="table-headers">Certificação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {features.map((item) => (
+                                    <tr>
+                                        <td class="feature-cell">
+                                            <span class="feature-name">{item.name}</span>
+                                            {item.tooltip && <span class="tooltip">{item.tooltip}</span>}
+                                        </td>
+
+                                        <td class="default-cell">
+                                            <div class="cell-content">
+                                                {<span class="text-value">{item.cargahor}</span>}
+                                            </div>
+                                        </td>
+
+                                        <td class="default-cell">
+                                            <div class="cell-content">
+                                                {<span class="text-value">{item.modalidade}</span>}
+                                            </div>
+                                        </td>
+                                        <td class="default-cell">
+                                            <div class="cell-content">
+                                                {typeof item.certificacao === 'boolean' 
+                                                    ? (item.certificacao ? <span set:html={CheckIcon} /> : <span set:html={XIcon} />)
+                                                    : <span class="text-value">{item.certificacao}</span>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <p>Obs.: Formatamos treinamentos com temas conforme sua necessidade!</p>
+                    </div>
                 </div>
-
-                <h3>{service.title}</h3>
-                <p>{service.desc}</p>
-
+            </section>
+            <div class="cards-grid">
+            {
+                content.map((content) => (
+                <div class="card">
+                    <div class="icon-box">
+                    {content.icon === "shield" && (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-badge-check-icon lucide-badge-check">
+                            <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/>
+                            <path d="m9 12 2 2 4-4"/>
+                        </svg>
+                    )}
+                    {content.icon === "leaf" && (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+                            <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+                        </svg>
+                    )}
+                    {content.icon === "traffic" && (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" >
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 6v6l4 2" />
+                        </svg>
+                    )}
+                    </div>
+    
+                    <h3>{content.title}</h3>
+                    <p>{content.desc}</p>
+    
+                </div>
+                ))
+            }
             </div>
-            ))
-        }
         </div>
     </div>
 </section>
+
 <section>
     <div style={{ height: '200px', position: 'relative', overflow: 'hidden', }}>
         <LogoLoop logos={imageLogos} speed={30} direction="left" logoHeight={48} gap={120} hoverSpeed={30} fadeOut fadeOutColor="#f2f2f2" ariaLabel="Partners enterprises" client:visible />
     </div>
 </section>
 
-
-<section class="comparison-section">
-    <div class="table-container">
-        <div class="table-wrapper">
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th class="table-headers">Treinamentos</th>
-                        <th class="table-headers">Carga Horária</th>
-                        <th class="table-headers">Modalidade</th>
-                        <th class="table-headers">Certificação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {features.map((item) => (
-                        <tr>
-                            <td class="feature-cell">
-                                <span class="feature-name">{item.name}</span>
-                                {item.tooltip && <span class="tooltip">{item.tooltip}</span>}
-                            </td>
-
-                            <td class="default-cell">
-                                <div class="cell-content">
-                                    {<span class="text-value">{item.cargahor}</span>}
-                                </div>
-                            </td>
-
-                            <td class="default-cell">
-                                <div class="cell-content">
-                                    {<span class="text-value">{item.modalidade}</span>}
-                                </div>
-                            </td>
-                            <td class="default-cell">
-                                <div class="cell-content">
-                                    {typeof item.certificacao === 'boolean' 
-                                        ? (item.certificacao ? <span set:html={CheckIcon} /> : <span set:html={XIcon} />)
-                                        : <span class="text-value">{item.certificacao}</span>
-                                    }
-                                </div>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <p>Obs.: Formatamos treinamentos com temas conforme sua necessidade!</p>
-        </div>
-    </div>
-</section>
+</AnimatedContent>
 
 
 <style>
@@ -298,7 +285,7 @@ const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="c
         width: 50%;
     }
 
-    .section-header h2 {
+    .title-container h2 {
         color: #ff0000;
         font-size: 2.5rem;
         margin-bottom: 1rem;
@@ -316,11 +303,23 @@ const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="c
                 background-clip: text;
     }
 
+    .two-grid-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+
+
     /* Grid dos Cards */
     .cards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        display: flex;
+        flex-direction: column;
         gap: 30px;
+        width: 25%;
+        align-items: center;
+        justify-content: center;
     }
 
     /* Estilo do Card */
@@ -371,6 +370,7 @@ const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="c
         line-height: 1.6;
         margin-bottom: 25px;
         flex-grow: 1; /* Faz o texto empurrar o link para o final */
+        text-align: justify;
     }
 
     /* Link "Saiba mais" */
@@ -404,7 +404,7 @@ const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="c
 
     /* --- Layout Geral --- */
     .comparison-section {
-        padding: 4rem 1.5rem;
+        padding: 0 0 4rem 0;
     }
 
     .table-container {
@@ -428,15 +428,16 @@ const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="c
     position: sticky;
     top: 103px; 
     backdrop-filter: blur(4px);
-            color: #000000 !important;
-    background-color: #d1d1d153 !important;
+    color: #000000 !important;
+    background-color: #e7e7e753 !important;
         background-clip: border-box !important;
-
+    border: 1px solid #9a9a9a53 !important;
+    border-radius: 10px;
     }
+
     .table-headers {
-        padding: 1.5rem;
+        padding: 1.6rem 20px;
         text-align: center;
-        width: 40%;
         color: transparent;
         font-size: 1rem;
         border-bottom: 1px solid #ccc;
@@ -444,6 +445,19 @@ const XIcon = `<svg class="icon cross" viewBox="0 0 24 24" fill="none" stroke="c
         background-color: #000000;
         -webkit-background-clip: text;
                 background-clip: text;
+    }
+
+    #table-headers-certificacao {
+        width: 5%;
+    }
+    #table-headers-modalidade {
+        width: 30%;
+    }
+    #table-headers-cargahoraria {
+        width: 20%;
+    }
+    #table-headers-treinamentos {
+        width: 60%;
     }
 
     /* --- Células do Corpo --- */
