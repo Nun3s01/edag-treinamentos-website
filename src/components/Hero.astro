@@ -3,49 +3,70 @@ import BlurText from './BlurText/BlurText.tsx';
 import ShinyText from './ShinyText/ShinyText.tsx';
 import RotatingText from './RotatingText/RotatingText.tsx';
 import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
+
+// Definindo os textos rotativos como constantes para facilitar leitura
+const rotatingTexts1 = ['seguro', 'consciente', 'organizado', 'humano', 'produtivo', 'inteligente', 'gentil', 'ágil'];
+const rotatingTexts2 = ['fluido', 'eficiente', 'responsável', 'confiável', 'dinâmico', 'funcional', 'ético', 'veloz'];
 ---
 
-<section class="hero-section" id="/">
+<section class="hero-section">
   <video autoplay muted loop playsinline class="video-bg" poster="/videos/hero-poster-background.jpg">
     <source src="/videos/hero-video.mp4" type="video/mp4" />
   </video>
 
   <div class="overlay"></div>
 
-  <div class="hero-content">
-    <h1><BlurText text="Excelência em Treinamentos" delay={60} stepDuration={.8} animateBy="words" direction="bottom" className="text-2xl mb-8" client:visible /></h1>
+  <div class="container hero-content">
+    
+    <h1>
+      <BlurText 
+        text="Excelência em Treinamentos" 
+        delay={60} 
+        stepDuration={0.8} 
+        animateBy="words" 
+        direction="bottom" 
+        className="text-2xl mb-8" 
+        client:visible 
+      />
+    </h1>
+    
     <div class="slogan-text-hero">
-      <p>Capacitando profissionais para um trânsito mais</p>
-      <div class="text-rotating-and-e">
-        <RotatingText
-          texts={['seguro', 'consciente', 'organizado', 'humano', 'produtivo', 'inteligente', 'gentil', 'ágil']}
-          mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-          staggerFrom={"first"}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: 0, opacity: 1}}
-          exit={{ y: "-20px", opacity: 0 }}
-          staggerDuration={0.025}
-          splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-          transition={{ type: "spring", damping: 30, stiffness: 400 }}
-          rotationInterval={6000}
-          client:visible
-        />
-      </div>
-      <p>e</p>
-      <div class="text-rotating-and-e">
-        <RotatingText
-          texts={['fluido', 'eficiente', 'responsável', 'confiável', 'dinâmico', 'funcional', 'ético', 'veloz']}
-          mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
-          staggerFrom={"last"}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: 0, opacity: 1}}
-          exit={{ y: "-20px", opacity: 0 }}
-          staggerDuration={0.025}
-          splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
-          transition={{ type: "spring", damping: 30, stiffness: 400 }}
-          rotationInterval={7000}
-          client:visible
-        />
+      <p class="intro-text">Capacitando profissionais para um trânsito mais</p>
+      
+      <div class="rotating-group">
+        <div class="text-rotating-and-e">
+          <RotatingText
+            texts={rotatingTexts1}
+            mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg rotating-box"
+            staggerFrom={"first"}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1}}
+            exit={{ y: "-20px", opacity: 0 }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={6000}
+            client:visible
+          />
+        </div>
+        
+        <p class="conjunction">e</p>
+        
+        <div class="text-rotating-and-e">
+          <RotatingText
+            texts={rotatingTexts2}
+            mainClassName="px-2 sm:px-2 md:px-3 bg-cyan-300 text-black overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg rotating-box"
+            staggerFrom={"last"}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1}}
+            exit={{ y: "-20px", opacity: 0 }}
+            staggerDuration={0.025}
+            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+            rotationInterval={7000}
+            client:visible
+          />
+        </div>
       </div>
     </div>
 
@@ -63,145 +84,192 @@ import AnimatedContent from './AnimatedContent/AnimatedContent.tsx';
       client:visible
     >
       <div class="btn-cta-container">
-        <a href="#contato" class="btn-cta"><ShinyText text="Fale com um Especialista " disabled={false} speed={3.5} className='custom-class' client:visible /></a>
+        <a href="#contato" class="btn-cta">
+          <ShinyText text="Fale com um Especialista" disabled={false} speed={3.5} className='custom-class' client:visible />
+        </a>
       </div>
     </AnimatedContent>
   </div>
-
 </section>
 
-
-
-
 <style>
+  /* --- Layout Desktop (Base) --- */
   .hero-section {
-    position: relative; /* Necessário para segurar os elementos absolutos */
-    height: 80vh;
-    min-height: 750px;
+    position: relative;
+    /* Altura calculada para descontar a navbar fixa */
+    height: calc(100vh - 90px); 
+    min-height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    background: transparent;
-    overflow: hidden; /* Corta o vídeo se ele sobrar nas bordas */;
-    border-bottom: 1px solid #000000;
-    box-shadow: 0 1px 10px #000000;
-    z-index: 100;
+    background: #000; /* Fundo preto caso o vídeo falhe */
+    overflow: hidden;
+    border-bottom: 1px solid #000;
+    box-shadow: 0 1px 10px #000;
+    z-index: 10; /* Ajustado para não brigar com o menu (que é 1000) */
   }
   
-  /* Estilo do Vídeo */
   .video-bg {
-    position: absolute; /* ISSO É O MAIS IMPORTANTE: Tira o vídeo da fila */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Garante que o vídeo cubra tudo sem esticar */
-    z-index: 0; /* Joga o vídeo para trás de tudo */
-    border-bottom: 1px solid #000000;
+    object-fit: cover;
+    z-index: 0;
   }
 
-  /* Estilo da Máscara Escura */
   .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Preto com 60% de opacidade */
-    z-index: 1; /* Fica na frente do vídeo, mas atrás do texto */
-    border-bottom: 1px solid #000000;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1;
   }
 
-  /* Conteúdo */
   .hero-content {
-    margin-top: -250px;
+    /* Centralização e posicionamento */
     position: relative;
-    z-index: 100; /* Garante que o texto fique no topo da pilha */
-    max-width: 900px;
+    z-index: 10;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 3rem; /* Leve ajuste visual */
   }
   
   h1 {
     font-family: 'Poppins', sans-serif;
-    margin-top: 180px;
     font-size: 3.5rem;
     font-weight: 700;
     line-height: 1.1;
-    text-shadow: 0 0px 2px rgb(255, 255, 255);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    margin-bottom: 1.5rem; /* Espaço entre título e slogan */
+    max-width: 900px;
   }
 
+  /* --- Slogan e Texto Rotativo --- */
   .slogan-text-hero {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Organiza verticalmente por padrão */
     align-items: center;
+    gap: 0.5rem;
     user-select: none;
   }
 
-  .slogan-text-hero p {
-    display: block;
-    padding: 0 4px;
-    align-items: center;
-    justify-self: center;
-    text-align: center;
+  .intro-text {
     font-family: 'Poppins', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     opacity: 0.9;
-    text-shadow: 0 0px 15px rgb(255, 255, 255);
+    text-shadow: 0 0px 15px rgba(255, 255, 255, 0.5);
+    text-align: center;
+    margin: 0;
   }
+
+  /* Grupo dos rotativos (fica em linha no desktop) */
+  .rotating-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Importante para mobile */
+    gap: 8px;
+  }
+
+  .conjunction {
+    font-size: 1.15rem;
+    margin: 0 5px;
+  }
+
   .text-rotating-and-e {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     border-radius: 6px;
-    font-family: 'Poppins', sans-serif;
     overflow: hidden;
-    width: auto;
   }
 
+  /* --- Botão CTA --- */
   .btn-cta-container {
-    margin-top: 7rem;
+    margin-top: 3rem; /* Reduzido de 7rem para ficar mais próximo */
     display: flex;
     justify-content: center;
-    align-items: center;
   }
+
   .btn-cta {
-    background-color: transparent; /* Vermelho EDAG */
-    font-family: "Poppins", sans-serif; /* Mesma fonte do site */
-    font-weight: 600; /* Semi-bold */
-    border: 1px solid #cc0000; /* Borda vermelha */
-    border-radius: 50px; /* Cantos arredondados iguais aos inputs */
+    display: inline-block;
+    background-color: transparent;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    border: 1px solid #cc0000;
+    border-radius: 50px;
     cursor: pointer;
-
-    /* Animação suave */
+    padding: 0.8rem 2rem; /* Padding interno do link */
     transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-
-
-    text-transform: uppercase; /* Letras maiúsculas para mais impacto */
+    text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-decoration: none; /* Remove sublinhado */
   }
 
-  /* Estado HOVER (Ao passar o mouse) */
   .btn-cta:hover {
-    background-color: #cc0000; /* Vermelho mais escuro */
-    transform: translateY(-2px); /* O botão "flutua" levemente para cima */
-    box-shadow: 0 6px 15px rgba(255, 0, 0, 0.4); /* Sombra vermelha brilhante (Glow) */
+    background-color: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(204, 0, 0, 0.4);
   }
 
-  /* Estado ACTIVE (Ao clicar) */
-  .btn-cta:active {
-    transform: translateY(1px); /* O botão afunda levemente */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-
-  /* Responsividade */
+  /* =========================================
+     RESPONSIVIDADE (Mobile < 768px)
+     ========================================= */
   @media (max-width: 768px) {
-    h1 {
-      font-size: 2.5rem;
-    }
     .hero-section {
-      height: 70vh;
+      height: auto; /* Altura flexível */
+      min-height: 85vh; /* Ocupa bem a tela */
+      padding: 6rem 0 4rem 0; /* Espaço interno generoso */
+    }
+
+    .hero-content {
+      margin-top: 0; /* Remove margem negativa antiga */
+    }
+
+    h1 {
+      font-size: 2rem; /* Fonte menor */
+      margin-bottom: 2rem;
+      padding: 0 1rem;
+    }
+
+    .intro-text {
+      font-size: 1rem;
+      max-width: 300px; /* Limita largura para quebrar linha bonito */
+      margin-bottom: 0.5rem;
+    }
+
+    .rotating-group {
+      flex-direction: column; /* Um embaixo do outro no mobile */
+      gap: 10px;
+    }
+
+    .conjunction {
+      font-size: 0.9rem;
+      margin: 2px 0;
+    }
+
+    /* Ajuste fino nos boxes rotativos */
+    :global(.rotating-box) {
+      font-size: 0.9rem !important;
+      padding: 2px 8px !important;
+    }
+
+    .btn-cta-container {
+      margin-top: 2.5rem;
+    }
+    
+    .btn-cta {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
     }
   }
 </style>

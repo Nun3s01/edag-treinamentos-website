@@ -1,68 +1,199 @@
 ---
-import logoEdag from '../assets/edag-logo.png';
+import logoEdag from "../assets/edag-logo.png";
 ---
 
-<header>
-    <nav>
-        <img src={logoEdag.src} alt="EDAG Treinamentos em Transportes" width="180px" />
-        <ul class="list-header-navbar">
-            <li class="item-list-header-navbar"><a href="/#/">Página Inicial</a></li>
-            <li class="item-list-header-navbar"><a href="/sobre-nos">Quem Somos</a></li>
-            <li class="item-list-header-navbar"><a href="/#treinamentos-e-capacitacao">Treinamentos & Capacitação</a></li>
-            <li class="item-list-header-navbar"><a href="#contato">Fale Conosco</a></li>
-        </ul>
+<header class="header">
+  <div class="container header-content">
+    <a href="/" class="logo-link">
+      <img
+        src={logoEdag.src}
+        alt="EDAG Treinamentos em Transportes"
+        width="160px"
+      />
+    </a>
+
+    <nav class="desktop-nav">
+      <ul class="list-header-navbar">
+        <li><a href="/">Página Inicial</a></li>
+        <li><a href="/sobre-nos">Quem Somos</a></li>
+        <li>
+          <a href="/#treinamentos-e-capacitacao">Treinamentos & Capacitação</a>
+        </li>
+        <li><a href="#contato">Fale Conosco</a></li>
+      </ul>
     </nav>
+
+    <button id="menu-btn" class="hamburger-btn" aria-label="Abrir Menu">
+      <svg
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="mobile-menu-wrapper">
+    <nav class="mobile-nav-content">
+      <a href="/">Página Inicial</a>
+      <a href="/sobre-nos">Quem Somos</a>
+      <a href="/#treinamentos-e-capacitacao">Treinamentos & Capacitação</a>
+      <a href="#contato">Fale Conosco</a>
+    </nav>
+  </div>
 </header>
 
+<script>
+  const menuBtn = document.getElementById("menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const menuLinks = document.querySelectorAll(".mobile-nav-content a");
 
+  if (menuBtn && mobileMenu) {
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("active");
+    });
+
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+      });
+    });
+  }
+</script>
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    
+    /* --- Reset e Base --- */
+    * { box-sizing: border-box; }
+    ul { list-style: none; padding: 0; margin: 0; }
+    a { text-decoration: none; }
 
-    header {
+    /* --- Header Container --- */
+    .header {
         position: sticky;
         top: 0;
+        left: 0;
         width: 100%;
-        background-color: #f2f2f2;
+        height: 90px;
+        background-color: #f2f2f2; /* Cor de fundo SÓLIDA é obrigatória para esconder o menu atrás */
+        border-bottom: 1px solid #ffffffbb;
         box-shadow: 0 -1px 5px #000000;
-        z-index: 999;
-        border: 1px solid #ffffffbb;
-        padding: 0 30px;
+        
+        /* Z-INDEX ALTO: Garante que a barra cinza fique NA FRENTE do menu gaveta */
+        z-index: 1000; 
     }
-    nav {
-        margin: 0 10%;
+
+    .header-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        height: 100%;
+        position: relative;
+        z-index: 1001; /* Conteúdo (Logo/Botão) acima do fundo do header */
+        background-color: #f2f2f2; /* Reforço de fundo para garantir cobertura */
     }
+
+    /* =========================================
+      DESKTOP (Padrão)
+    ========================================= */
+    .desktop-nav {
+        display: block; 
+    }
+
     .list-header-navbar {
         display: flex;
-        justify-content: right;
+        gap: 30px;
         align-items: center;
-        list-style-type: none;
     }
-    .item-list-header-navbar {
-        margin: 15px;
-    }
-    a {
+
+    .desktop-nav a {
         padding: 2px 0;
         color: #13151a;
-        text-decoration: none;
         font-weight: bold;
         background-color: transparent;
         border-bottom: 2px solid transparent;
+        transition: all 0.3s ease-in-out;
     }
 
-
-    a:hover {
-        transition: all 0.3s ease-in-out;
-        padding: 2px 0;
+    .desktop-nav a:hover {
         border-bottom: 2px solid #ff0000;
     }
 
+    /* Esconde elementos Mobile no Desktop */
+    .hamburger-btn, .mobile-menu-wrapper {
+        display: none; 
+    }
+
+    /* =========================================
+       MOBILE (Telas < 768px)
+       ========================================= */
+    @media (max-width: 768px) {
+        
+        .desktop-nav { display: none; }
+
+        .hamburger-btn {
+            display: block;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #13151a;
+            padding: 5px;
+        }
+
+        /* --- A MÁGICA DO MENU GAVETA --- */
+        .mobile-menu-wrapper {
+            display: block;
+            position: absolute;
+            
+            /* Começa EXATAMENTE abaixo da barra cinza */
+            top: 90px; 
+            left: 0;
+            width: 100%;
+            background-color: #f2f2f2;
+            border-top: 1px solid #ddd;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            
+            /* Z-INDEX MENOR: Fica atrás do header (que é 1000) */
+            z-index: 900; 
+            
+            /* ESTADO FECHADO:
+                translateY(-100%) faz o menu subir a própria altura.
+               Como o z-index é 900 (menor que o header 1000), ele "esconde" atrás do header. */
+            transform: translateY(-100%);
+            
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* ESTADO ABERTO: Desce para a posição natural (0) */
+        .mobile-menu-wrapper.active {
+            transform: translateY(0);
+        }
+
+        .mobile-nav-content {
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+            background-color: #f2f2f2; /* Garante que não fique transparente */
+        }
+
+        .mobile-nav-content a {
+            padding: 1.2rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 1.1rem;
+            color: #13151a;
+            font-weight: bold;
+        }
+        
+        .mobile-nav-content a:hover {
+                color: #cc0000;
+                background-color: #e6e6e6;
+        }
+    }
 </style>
