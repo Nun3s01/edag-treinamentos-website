@@ -156,7 +156,7 @@ const rotatingTexts2 = ['fluido', 'eficiente', 'responsável', 'confiável', 'di
   /* --- Slogan e Texto Rotativo --- */
   .slogan-text-hero {
     display: flex;
-    flex-direction: column; /* Organiza verticalmente por padrão */
+    flex-direction: row; /* Organiza verticalmente por padrão */
     align-items: center;
     gap: 0.5rem;
     user-select: none;
@@ -190,12 +190,11 @@ const rotatingTexts2 = ['fluido', 'eficiente', 'responsável', 'confiável', 'di
     justify-content: center;
     align-items: center;
     border-radius: 6px;
-    overflow: hidden;
   }
 
   /* --- Botão CTA --- */
   .btn-cta-container {
-    margin-top: 3rem; /* Reduzido de 7rem para ficar mais próximo */
+    margin-top: 5rem; /* Reduzido de 7rem para ficar mais próximo */
     display: flex;
     justify-content: center;
   }
@@ -205,10 +204,11 @@ const rotatingTexts2 = ['fluido', 'eficiente', 'responsável', 'confiável', 'di
     background-color: transparent;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
+    font-size: 0.9rem;
     border: 1px solid #cc0000;
     border-radius: 50px;
     cursor: pointer;
-    padding: 0.8rem 2rem; /* Padding interno do link */
+    padding: 0.4rem 2rem; /* Padding interno do link */
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -227,7 +227,7 @@ const rotatingTexts2 = ['fluido', 'eficiente', 'responsável', 'confiável', 'di
   @media (max-width: 768px) {
     .hero-section {
       height: auto; /* Altura flexível */
-      min-height: 85vh; /* Ocupa bem a tela */
+      min-height: 100vh; /* Ocupa bem a tela */
       padding: 6rem 0 4rem 0; /* Espaço interno generoso */
     }
 
@@ -235,25 +235,30 @@ const rotatingTexts2 = ['fluido', 'eficiente', 'responsável', 'confiável', 'di
       margin-top: 0; /* Remove margem negativa antiga */
     }
 
+    .container {
+      padding: 0;
+    }
+
     h1 {
-      font-size: 2rem; /* Fonte menor */
+      font-size: 1.4rem; /* Fonte menor */
       margin-bottom: 2rem;
-      padding: 0 1rem;
+    }
+    .slogan-text-hero {
+      flex-direction: column  ; /* Organiza verticalmente por padrão */
     }
 
     .intro-text {
-      font-size: 1rem;
+      font-size: 0.75rem;
       max-width: 300px; /* Limita largura para quebrar linha bonito */
       margin-bottom: 0.5rem;
     }
 
     .rotating-group {
-      flex-direction: column; /* Um embaixo do outro no mobile */
-      gap: 10px;
+      flex-direction: row; /* ao lado do outro no mobile */
     }
 
     .conjunction {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       margin: 2px 0;
     }
 
@@ -264,12 +269,12 @@ const rotatingTexts2 = ['fluido', 'eficiente', 'responsável', 'confiável', 'di
     }
 
     .btn-cta-container {
-      margin-top: 2.5rem;
+      margin-top: 2rem;
     }
     
     .btn-cta {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
+        padding: 0.1rem 0.1rem;
+        font-size: 0.7rem;
     }
   }
 </style>
