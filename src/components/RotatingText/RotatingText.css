@@ -23,7 +23,7 @@
     align-items: center;
     justify-self: center;
     text-align: center;
-    font-size: 0.75rem;
+    font-size: 1.25rem;
     opacity: 0.9;
     text-shadow: 0 0px 15px rgb(255, 255, 255);
 }
@@ -40,4 +40,11 @@
 
 .text-rotate-space {
     white-space: pre;
+}
+
+
+@media (max-width: 768px) {
+    .text-rotate-word {
+        font-size: 0.75rem;
+    }
 }
